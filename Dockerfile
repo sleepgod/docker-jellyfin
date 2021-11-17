@@ -39,14 +39,23 @@ RUN \
 	${JELLYFIN} \
 	libfontconfig1 \
 	libfreetype6 \
-	intel-media-va-driver-non-free \
 	vainfo \
 	libssl1.1 && \
  echo "**** cleanup ****" && \
  rm -rf \
 	/tmp/* \
 	/var/lib/apt/lists/* \
-	/var/tmp/*
+	/var/tmp/* \
+  && mkdir intel-compute-runtime \
+  && cd intel-compute-runtime \
+  && wget https://github.com/intel/compute-runtime/releases/download/21.45.21574/intel-gmmlib_21.2.1_amd64.deb \
+  && wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.8744/intel-igc-core_1.0.8744_amd64.deb \
+  && wget https://github.com/intel/intel-graphics-compiler/releases/download/igc-1.0.8744/intel-igc-opencl_1.0.8744_amd64.deb \
+  && wget https://github.com/intel/compute-runtime/releases/download/21.45.21574/intel-opencl-icd_21.45.21574_amd64.deb \
+  && wget https://github.com/intel/compute-runtime/releases/download/21.45.21574/intel-level-zero-gpu_1.2.21574_amd64.deb \
+  && dpkg -i *.deb \
+  && cd .. \
+  && rm -rf intel-compute-runtime
 
 # add local files
 COPY root/ / 

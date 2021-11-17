@@ -55,8 +55,11 @@ RUN \
   && wget https://github.com/intel/compute-runtime/releases/download/21.45.21574/intel-level-zero-gpu_1.2.21574_amd64.deb \
   && dpkg -i *.deb \
   && cd .. \
-  && rm -rf intel-compute-runtime
-
+  && rm -rf intel-compute-runtime \
+  && echo "**** create abc user and make our folders ****" \
+  && useradd -u 911 -U -d /config -s /bin/false abc \
+  && usermod -G users abc
+ 
 # add local files
 COPY root/ / 
 

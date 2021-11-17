@@ -1,9 +1,8 @@
-FROM debian:stable-slim
+FROM debian:bullseye-slim
 
 ADD https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.3/s6-overlay-amd64.tar.gz /tmp/
 RUN gunzip -c /tmp/s6-overlay-amd64.tar.gz | tar -xf - -C /
 ENTRYPOINT ["/init"]
-
 
 # set version label
 # ARG BUILD_DATE
@@ -23,9 +22,9 @@ RUN \
  apt-get install -y ca-certificates --no-install-recommends \
 	gnupg curl apt-utils && \
  echo "**** install jellyfin 1*****" && \
- curl -s https://repo.jellyfin.org/ubuntu/jellyfin_team.gpg.key | apt-key add - && \
+ curl -s https://repo.jellyfin.org/jellyfin_team.gpg.key | apt-key add - && \
  echo "**** install jellyfin 2*****" && \
- echo 'deb [arch=amd64] https://repo.jellyfin.org/ubuntu focal main' > /etc/apt/sources.list.d/jellyfin.list && \
+ echo 'deb [arch=amd64] https://repo.jellyfin.org/debian bullseye main' > /etc/apt/sources.list.d/jellyfin.list && \
  if [ -z ${JELLYFIN_RELEASE+x} ]; then \
         JELLYFIN="jellyfin"; \
  else \

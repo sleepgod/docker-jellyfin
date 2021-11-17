@@ -40,6 +40,7 @@ RUN \
 	libfontconfig1 \
 	libfreetype6 \
 	vainfo \
+	intel-media-va-driver \
 	libssl1.1 && \
  echo "**** cleanup ****" && \
  rm -rf \

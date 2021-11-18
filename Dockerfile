@@ -39,6 +39,7 @@ RUN \
 	libfreetype6 \
 	libssl1.1 \
 	vainfo \
+	mesa-va-drivers \
 	intel-media-va-driver-non-free && \
  echo "**** cleanup ****" && \
  rm -rf \

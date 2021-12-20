@@ -26,15 +26,15 @@ RUN \
         JELLYFIN="jellyfin=${JELLYFIN_RELEASE}"; \
  fi && \
  apt-get update && \
-#	jellyfin-web \
+#	${JELLYFIN} \
 apt-get install -y --no-install-recommends \
 	at \
 	xfonts-wqy \
 	fonts-wqy-zenhei \
 	fonts-wqy-microhei \
-	${JELLYFIN} \
 	jellyfin-ffmpeg \
 	jellyfin-server \
+	jellyfin-web \
 	libfontconfig1 \
 	libfreetype6 \
 	libssl1.1 \

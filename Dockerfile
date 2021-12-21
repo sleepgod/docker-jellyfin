@@ -36,6 +36,7 @@ RUN \
 	xfonts-wqy \
 	fonts-wqy-zenhei \
 	fonts-wqy-microhei \
+	jellyfin-web \
 	${JELLYFIN} \
 	libfontconfig1 \
 	libfreetype6 \

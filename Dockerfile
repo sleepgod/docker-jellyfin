@@ -24,7 +24,7 @@ RUN \
  echo "**** install jellyfin 1*****" && \
  curl -s https://repo.jellyfin.org/jellyfin_team.gpg.key | apt-key add - && \
  echo "**** install jellyfin 2*****" && \
- echo 'deb [arch=amd64] https://repo.jellyfin.org/debian bullseye main' > /etc/apt/sources.list.d/jellyfin.list && \
+ echo 'deb [arch=amd64] https://repo.jellyfin.org/debian bullseye stable-pre' > /etc/apt/sources.list.d/jellyfin.list && \
  if [ -z ${JELLYFIN_RELEASE+x} ]; then \
         JELLYFIN="jellyfin"; \
  else \

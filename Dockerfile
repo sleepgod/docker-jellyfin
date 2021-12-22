@@ -20,7 +20,7 @@ RUN \
  echo "**** install packages ****" && \
  apt-get update && \
  apt-get install -y ca-certificates --no-install-recommends \
-	gnupg curl apt-utils wget && \
+	gnupg curl apt-utils wget libicu-dev && \
  echo "**** install jellyfin 1*****" && \
  curl -s https://repo.jellyfin.org/jellyfin_team.gpg.key | apt-key add - && \
  echo "**** install jellyfin 2*****" && \

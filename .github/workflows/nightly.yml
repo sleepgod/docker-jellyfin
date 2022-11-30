@@ -17,25 +17,6 @@ jobs:
           DEBIAN_FRONTEND: noninteractive
         run: |
           sudo timedatectl set-timezone "Asia/Shanghai"
-        
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          ref: 'nightly'
-      - run: |
-          dt=`date +%Y%m%d%H%M%S`
-          echo $dt
-          sed -i "7c LABEL build_version=\"sleepgod version:nightly Build-date:$dt\"" Dockerfile
-          git config user.name sleepgod
-          git config user.email dingwenxuan@gmail.com
-          git add .
-          git commit -m "build_version"
-          git push
-      -
-        name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: 'nightly'
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2

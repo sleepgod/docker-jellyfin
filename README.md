@@ -7,7 +7,7 @@ Here are some example snippets to help you get started creating a container.
 Compatible with docker-compose v2 schemas.
 
 ```yaml
----
+----
 version: "2.1"
 services:
   jellyfin:

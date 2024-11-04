@@ -1,10 +1,10 @@
 name: Build jellyfin nightly2
 on:
   workflow_dispatch:
-  push:
-    branches: [ "nightly" ]
-  pull_request:
-    branches: [ "nightly" ]
+  # push:
+  #   branches: [ "nightly" ]
+  # pull_request:
+  #   branches: [ "nightly" ]
   schedule:
     - cron: 30 0 * * *
 

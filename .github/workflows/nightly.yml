@@ -1,36 +1,47 @@
 name: Build jellyfin nightly2
-
 on:
   workflow_dispatch:
   push:
     branches: [ "nightly" ]
   pull_request:
     branches: [ "nightly" ]
+  schedule:
+    - cron: 30 0 * * *
 
 jobs:
   Docker-trigger-scheduler:
     runs-on: ubuntu-latest
-
     steps:
       - name: Initialization environment
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
           sudo timedatectl set-timezone "Asia/Shanghai"
-      -
-        name: Set up QEMU
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: 'nightly'
+      - run: |
+          dt=`date +%Y%m%d%H%M%S`
+          echo $dt
+          sed -i "7c LABEL build_version=\"sleepgod version:nightly Build-date:$dt\"" Dockerfile
+          git config user.name sleepgod
+          git config user.email dingwenxuan@gmail.com
+          git add .
+          git commit -m "build_version"
+          git push
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-      -
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      -
-        name: Login to Docker Hub
+      - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push
+      - name: Build and push
         uses: docker/build-push-action@v3
         with:
           push: true

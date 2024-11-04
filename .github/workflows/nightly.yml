@@ -1,4 +1,4 @@
-name: Build jellyfin nightly
+name: Build jellyfin nightly2
 
 on:
   workflow_dispatch:

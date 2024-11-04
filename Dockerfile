@@ -32,7 +32,6 @@ apt-get install -y --no-install-recommends \
 	xfonts-wqy \
 	fonts-wqy-zenhei \
 	fonts-wqy-microhei \
-	jellyfin-ffmpeg \
 	jellyfin-server \
 	jellyfin-web \
 	libfontconfig1 \

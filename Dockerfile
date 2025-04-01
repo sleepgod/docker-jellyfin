@@ -22,6 +22,7 @@ RUN \
   fi && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
+    fonts-wqy-microhei fonts-wqy-zenhei
     at \
     jellyfin=${JELLYFIN_RELEASE} \
     mesa-va-drivers \

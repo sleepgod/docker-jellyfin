@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch:
+
+env:
+  IMAGE_NAME: ghcr.io/sleepgod/jellyfin:latest
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set current date as env variable
+      run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+    - uses: actions/checkout@v4
+    - name: echo env
+      run: echo ${{ env.IMAGE_NAME}}
+    - name: Build Code
+      run: mvn clean package -Dmaven.test.skip=true
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag ${{ env.IMAGE_NAME}} --build-arg BUILD_DATE=$NOW --build-arg VERSION='1.0'
+    - name: Log in to registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+    - name: Push image
+      run: docker push ${{ env.IMAGE_NAME}}

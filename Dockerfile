@@ -14,6 +14,7 @@ ARG DEBIAN_FRONTEND="noninteractive"
 ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
 # https://github.com/dlemstra/Magick.NET/issues/707#issuecomment-785351620
 ENV MALLOC_TRIM_THRESHOLD_=131072
+ENV ATTACHED_DEVICES_PERMS="/dev/dri /dev/dvb /dev/vchiq /dev/vc-mem /dev/video1? -type c"
 
 RUN \
   echo "**** install jellyfin *****" && \
@@ -26,9 +27,11 @@ RUN \
   apt-get install -y --no-install-recommends \
     fonts-wqy-microhei fonts-wqy-zenhei \
     at \
-    jellyfin=${JELLYFIN_RELEASE} \
+    libjemalloc2 \
     mesa-va-drivers \
     xmlstarlet && \
+  apt-get install -y --no-install-recommends \
+    jellyfin=${JELLYFIN_RELEASE} && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/* \
